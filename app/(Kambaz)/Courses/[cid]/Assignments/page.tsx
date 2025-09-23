@@ -7,6 +7,7 @@ export default function Assignments() {
                    id="wd-search-assignment" />
             <button id="wd-add-assignment-group">+ Group</button>
             <button id="wd-add-assignment">+ Assignment</button>
+
             <h3 id="wd-assignments-title">
                 ASSIGNMENTS 40% of Total <button>+</button>
             </h3>
@@ -35,6 +36,12 @@ export default function Assignments() {
                     Multiple Modules | <strong> Not available until </strong> May 20 at 12:00am |
                     <strong> Due </strong> May 27 at 11:59pm | 100pts
                 </li>
+            </ul>
+
+            <h3 id="wd-quizzes-title">
+                QUIZZES 20% of Total <button>+</button>
+            </h3>
+            <ul id="wd-quiz-list">
                 <li className="wd-assignment-list-item">
                     <Link href="/Courses/1234/Assignments/101"
                           className="wd-assignment-link">
@@ -51,6 +58,12 @@ export default function Assignments() {
                     Module 4 | <strong> Available </strong> May 24 at 12:00am |
                     <strong> Due </strong> May 25 at 11:59pm | 50pts
                 </li>
+            </ul>
+
+            <h3 id="wd-exams-title">
+                EXAMS 40% of Total <button>+</button>
+            </h3>
+            <ul id="wd-exam-list">
                 <li className="wd-assignment-list-item">
                     <Link href="/Courses/1234/Assignments/201"
                           className="wd-assignment-link">

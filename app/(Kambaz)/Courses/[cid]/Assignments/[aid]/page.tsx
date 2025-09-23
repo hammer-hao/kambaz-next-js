@@ -6,8 +6,8 @@ export default function AssignmentEditor() {
             <textarea
                 id="wd-description"
                 defaultValue="Submit a link to the landing page of your Web application running on Vercel. The landing page should be the Kambaz application with a link to the Lab exercises. The Kambaz application should include a link to navigate back to the landing page."
-                rows="10"
-                cols="50"
+                rows={10}
+                cols={50}
             />
             <br />
             <table>

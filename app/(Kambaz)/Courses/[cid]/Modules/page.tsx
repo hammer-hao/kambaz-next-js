@@ -2,6 +2,7 @@ import ModulesControls from "./ModulesControls";
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {BsGripVertical} from "react-icons/bs";
 import LessonControlButtons from "@/app/(Kambaz)/Courses/[cid]/Modules/LessonControlButtons";
+import ModuleControlButtons from "@/app/(Kambaz)/Courses/[cid]/Modules/ModuleControlButtons";
 
 export default function Modules() {
     return (
@@ -10,7 +11,7 @@ export default function Modules() {
             <ListGroup className= "rounded-0" id="wd-modules">
                 <ListGroupItem className="wd-module p-0 mb-5 fs-5 border-gray">
                     <div className="wd-title p-3 ps-2 bg-secondary">
-                        <BsGripVertical className="me-2 fs-3" /> Week 1, Lection 1 - Course Introduction, Syllabus, Agenda <LessonControlButtons />
+                        <BsGripVertical className="me-2 fs-3" /> Week 1, Lection 1 - Course Introduction, Syllabus, Agenda <ModuleControlButtons />
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
                         <ListGroupItem className="wd-lesson p-3 ps-1">
@@ -34,7 +35,9 @@ export default function Modules() {
                     </ListGroup>
                 </ListGroupItem>
                 <ListGroupItem className="wd-module p-0 mb-5 fs-5 border-gray">
-                    <div className="wd-title p-3 ps-2 bg-secondary"> Week 1, Lecture 2- Formatting User Interfaces with HTML </div>
+                    <div className="wd-title p-3 ps-2 bg-secondary">
+                        <BsGripVertical /> Week 1, Lecture 2- Formatting User Interfaces with HTML <ModuleControlButtons />
+                    </div>
                     <ListGroup className="wd-lessons rounded-0">
                         <ListGroupItem className="wd-lesson p-3 ps-1">
                             <BsGripVertical className="me-2 fs-3" /> Learn how to create user interfaces with HTML <LessonControlButtons />

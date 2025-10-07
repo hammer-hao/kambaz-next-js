@@ -1,8 +1,10 @@
 import Link from "next/link";
+import AssignmentControls from "@/app/(Kambaz)/Courses/[cid]/Assignments/AssignmentControls";
 
 export default function Assignments() {
     return (
         <div id="wd-assignments">
+            <AssignmentControls /> <br />
             <input placeholder="Search for Assignments"
                    id="wd-search-assignment" />
             <button id="wd-add-assignment-group">+ Group</button>

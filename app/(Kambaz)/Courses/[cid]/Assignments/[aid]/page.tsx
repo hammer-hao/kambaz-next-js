@@ -1,102 +1,158 @@
+"use client";
+
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
+import InputGroup from "react-bootstrap/InputGroup";
+import Button from "react-bootstrap/Button";
+import Stack from "react-bootstrap/Stack";
+
 export default function AssignmentEditor() {
     return (
-        <div id="wd-assignments-editor">
-            <label htmlFor="wd-name">Assignment Name</label> <br />
-            <input id="wd-name" defaultValue="A1 - ENV + HTML" /><br /><br />
-            <textarea
-                id="wd-description"
-                defaultValue="Submit a link to the landing page of your Web application running on Vercel. The landing page should be the Kambaz application with a link to the Lab exercises. The Kambaz application should include a link to navigate back to the landing page."
-                rows={10}
-                cols={50}
-            />
-            <br />
-            <table>
-                <tbody>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-points">Points</label>
-                    </td>
-                    <td>
-                        <input id="wd-points" defaultValue={100} />
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-group">Assignment Group</label>
-                    </td>
-                    <td>
-                        <select id="wd-group" defaultValue="ASSIGNMENTS">
+        <div id="wd-assignments-editor" className="p-3">
+            {/* Assignment Name */}
+            <Form>
+                <Form.Group className="mb-3" controlId="wd-name">
+                    <Form.Label className="fw-semibold">Assignment Name</Form.Label>
+                    <Form.Control defaultValue="A1" />
+                </Form.Group>
+
+                {/* Description panel */}
+                <Card className="mb-4 border">
+                    <Card.Body>
+                        <p className="mb-2">
+                            The assignment is <span className="text-danger">available online</span>
+                        </p>
+                        <p className="mb-2">
+                            Submit a link to the landing page of your Web application running on{" "}
+                            <a href="#" className="link-primary">Netlify</a>.
+                        </p>
+                        <p className="mb-2">The landing page should include the following:</p>
+                        <ul className="mb-2">
+                            <li>Your full name and section</li>
+                            <li>Links to each of the lab assignments</li>
+                            <li>Link to the <a href="#" className="link-primary">Kanbas</a> application</li>
+                            <li>Links to all relevant source code repositories</li>
+                        </ul>
+                        <p className="mb-0">
+                            The <a href="#" className="link-primary">Kanbas</a> application should include a link to
+                            navigate back to the landing page.
+                        </p>
+                    </Card.Body>
+                </Card>
+
+                {/* Points */}
+                <Form.Group as={Row} className="mb-3" controlId="wd-points">
+                    <Form.Label column md={3} className="fw-semibold text-md-end">
+                        Points
+                    </Form.Label>
+                    <Col md={9}>
+                        <Form.Control type="number" defaultValue={100} />
+                    </Col>
+                </Form.Group>
+
+                {/* Assignment Group */}
+                <Form.Group as={Row} className="mb-3" controlId="wd-group">
+                    <Form.Label column md={3} className="fw-semibold text-md-end">
+                        Assignment Group
+                    </Form.Label>
+                    <Col md={9}>
+                        <Form.Select defaultValue="ASSIGNMENTS">
                             <option value="ASSIGNMENTS">ASSIGNMENTS</option>
                             <option value="QUIZZES">QUIZZES</option>
                             <option value="EXAMS">EXAMS</option>
                             <option value="PROJECTS">PROJECTS</option>
                             <option value="OTHER">OTHER</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-display-grade-as">Display Grade as</label>
-                    </td>
-                    <td>
-                        <select id="wd-display-grade-as" defaultValue="Percentage">
+                        </Form.Select>
+                    </Col>
+                </Form.Group>
+
+                {/* Display Grade as */}
+                <Form.Group as={Row} className="mb-3" controlId="wd-display-grade-as">
+                    <Form.Label column md={3} className="fw-semibold text-md-end">
+                        Display Grade as
+                    </Form.Label>
+                    <Col md={9}>
+                        <Form.Select defaultValue="Percentage">
                             <option value="Percentage">Percentage</option>
                             <option value="Points">Points</option>
                             <option value="Letter">Letter</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label htmlFor="wd-submission-type">Submission Type</label>
-                    </td>
-                    <td>
-                        <select id="wd-submission-type" defaultValue="Online">
+                        </Form.Select>
+                    </Col>
+                </Form.Group>
+
+                {/* Submission Type + Online Entry Options (card on right) */}
+                <Form.Group as={Row} className="mb-4" controlId="wd-submission-type">
+                    <Form.Label column md={3} className="fw-semibold text-md-end">
+                        Submission Type
+                    </Form.Label>
+                    <Col md={9}>
+                        <Form.Select className="mb-3" defaultValue="Online">
                             <option value="Online">Online</option>
                             <option value="Offline">Offline</option>
-                        </select>
-                        <br />
-                        <span>Online Entry Options</span>
-                        <br />
-                        <input type="checkbox" id="wd-text-entry" />
-                        <label htmlFor="wd-text-entry">Text Entry</label> <br />
-                        <input type="checkbox" id="wd-website-url" />
-                        <label htmlFor="wd-website-url">Website URL</label> <br />
-                        <input type="checkbox" id="wd-media-recordings"></input>
-                        <label htmlFor="wd-media-recordings">Media Recordings</label> <br />
-                        <input type="checkbox" id="wd-student-annotations"></input>
-                        <label htmlFor="wd-student-annotations">Student Annotations</label> <br />
-                        <input type="checkbox" id="wd-file-upload"></input>
-                        <label htmlFor="wd-file-upload">File Upload</label> <br />
-                    </td>
-                </tr>
-                <tr>
-                    <td align="right" valign="top">
-                        <label>Assign</label>
-                    </td>
-                    <td>
-                        <label htmlFor="wd-assign-to"></label> Assign to <br/>
-                        <input id="wd-assign-to" defaultValue="Everyone"></input> <br/>
-                        <label htmlFor="wd-due-date"></label> Due <br/>
-                        <input id="wd-due-date" type="date" defaultValue="2025-09-01"></input> <br/>
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <label htmlFor="wd-available-from">Available From</label> <br/>
-                                    <input id="wd-available-from" type="date" defaultValue="2025-09-01"></input> <br/>
-                                </td>
-                                <td>
-                                    <label htmlFor="wd-available-until"></label> Until <br/>
-                                    <input id="wd-available-until" type="date" defaultValue="2025-10-01"></input> <br/>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-                {/* Complete on your own */}
-            </table>
+                        </Form.Select>
+
+                        <Card className="border">
+                            <Card.Body>
+                                <div className="fw-semibold mb-2">Online Entry Options</div>
+                                <Stack gap={2}>
+                                    <Form.Check type="checkbox" id="wd-text-entry" label="Text Entry" />
+                                    <Form.Check type="checkbox" id="wd-website-url" label="Website URL" defaultChecked />
+                                    <Form.Check type="checkbox" id="wd-media-recordings" label="Media Recordings" />
+                                    <Form.Check type="checkbox" id="wd-student-annotations" label="Student Annotation" />
+                                    <Form.Check type="checkbox" id="wd-file-upload" label="File Uploads" />
+                                </Stack>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Form.Group>
+
+                {/* Assign block (card on right) */}
+                <Form.Group as={Row} className="mb-4">
+                    <Form.Label column md={3} className="fw-semibold text-md-end">
+                        Assign
+                    </Form.Label>
+                    <Col md={9}>
+                        <Card className="border">
+                            <Card.Body>
+                                <Form.Group className="mb-3" controlId="wd-assign-to">
+                                    <Form.Label className="fw-semibold">Assign to</Form.Label>
+                                    <Form.Control defaultValue="Everyone" />
+                                </Form.Group>
+
+                                <Form.Group className="mb-3" controlId="wd-due-date">
+                                    <Form.Label className="fw-semibold">Due</Form.Label>
+                                    <InputGroup>
+                                        <Form.Control type="datetime-local" defaultValue="2024-05-13T23:59" />
+                                    </InputGroup>
+                                </Form.Group>
+
+                                <Row className="g-3">
+                                    <Col>
+                                        <Form.Group controlId="wd-available-from">
+                                            <Form.Label className="fw-semibold">Available from</Form.Label>
+                                            <Form.Control type="datetime-local" defaultValue="2024-05-06T00:00" />
+                                        </Form.Group>
+                                    </Col>
+                                    <Col>
+                                        <Form.Group controlId="wd-available-until">
+                                            <Form.Label className="fw-semibold">Until</Form.Label>
+                                            <Form.Control type="datetime-local" />
+                                        </Form.Group>
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Form.Group>
+
+                {/* Footer actions */}
+                <div className="d-flex justify-content-end gap-2 pt-3 border-top">
+                    <Button variant="light">Cancel</Button>
+                    <Button variant="danger">Save</Button>
+                </div>
+            </Form>
         </div>
-    );}
+    );
+}

@@ -27,6 +27,7 @@ export default function Assignments() {
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
                         {thisCourseAssignments.map((assignment) => (
+                            // eslint-disable-next-line react/jsx-key
                             <ListGroupItem className="wd-lesson p-3 ps-1 d-flex justify-content-between align-items-center">
                                 <div className="d-flex align-items-center">
                                     <BsGripVertical className="me-2 fs-3" />

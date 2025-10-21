@@ -8,37 +8,28 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Button from "react-bootstrap/Button";
 import Stack from "react-bootstrap/Stack";
 
+import { useParams } from "next/navigation";
+import { assignments } from "../../../../Database"
+
 export default function AssignmentEditor() {
+    const { cid, aid } = useParams();
+    const assignment = assignments.find((a) => a._id === aid)
+
+    console.log(assignment)
+
     return (
         <div id="wd-assignments-editor" className="p-3">
             {/* Assignment Name */}
             <Form>
                 <Form.Group className="mb-3" controlId="wd-name">
                     <Form.Label className="fw-semibold">Assignment Name</Form.Label>
-                    <Form.Control defaultValue="A1" />
+                    <Form.Control defaultValue={assignment.title} />
                 </Form.Group>
 
                 {/* Description panel */}
                 <Card className="mb-4 border">
                     <Card.Body>
-                        <p className="mb-2">
-                            The assignment is <span className="text-danger">available online</span>
-                        </p>
-                        <p className="mb-2">
-                            Submit a link to the landing page of your Web application running on{" "}
-                            <a href="#" className="link-primary">Netlify</a>.
-                        </p>
-                        <p className="mb-2">The landing page should include the following:</p>
-                        <ul className="mb-2">
-                            <li>Your full name and section</li>
-                            <li>Links to each of the lab assignments</li>
-                            <li>Link to the <a href="#" className="link-primary">Kanbas</a> application</li>
-                            <li>Links to all relevant source code repositories</li>
-                        </ul>
-                        <p className="mb-0">
-                            The <a href="#" className="link-primary">Kanbas</a> application should include a link to
-                            navigate back to the landing page.
-                        </p>
+                        {assignment.description}
                     </Card.Body>
                 </Card>
 
@@ -48,7 +39,7 @@ export default function AssignmentEditor() {
                         Points
                     </Form.Label>
                     <Col md={9}>
-                        <Form.Control type="number" defaultValue={100} />
+                        <Form.Control type="number" defaultValue={assignment.points} />
                     </Col>
                 </Form.Group>
 
@@ -124,7 +115,7 @@ export default function AssignmentEditor() {
                                 <Form.Group className="mb-3" controlId="wd-due-date">
                                     <Form.Label className="fw-semibold">Due</Form.Label>
                                     <InputGroup>
-                                        <Form.Control type="datetime-local" defaultValue="2024-05-13T23:59" />
+                                        <Form.Control type="datetime-local" defaultValue={assignment.due} />
                                     </InputGroup>
                                 </Form.Group>
 
@@ -132,7 +123,7 @@ export default function AssignmentEditor() {
                                     <Col>
                                         <Form.Group controlId="wd-available-from">
                                             <Form.Label className="fw-semibold">Available from</Form.Label>
-                                            <Form.Control type="datetime-local" defaultValue="2024-05-06T00:00" />
+                                            <Form.Control type="datetime-local" defaultValue={assignment.notAvailableUntil} />
                                         </Form.Group>
                                     </Col>
                                     <Col>

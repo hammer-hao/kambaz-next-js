@@ -1,0 +1,83 @@
+[
+  {
+    "_id": "A101",
+    "title": "Propulsion Assignment",
+    "course": "RS101",
+    "notAvailableUntil": "2025-09-01T00:00",
+    "due": "2025-09-15T23:59",
+    "points": 100,
+    "description": "Analyze the thrust and efficiency characteristics of various propulsion systems, comparing jet and rocket engines under different atmospheric conditions."
+  },
+  {
+    "_id": "A102",
+    "title": "Combustion Analysis",
+    "course": "RS101",
+    "notAvailableUntil": "2025-09-16T00:00",
+    "due": "2025-09-30T23:59",
+    "points": 90,
+    "description": "Evaluate the thermodynamic performance of combustion chambers by calculating fuel-air ratios, flame temperatures, and energy release rates."
+  },
+  {
+    "_id": "A103",
+    "title": "Nozzle Design Project",
+    "course": "RS101",
+    "notAvailableUntil": "2025-10-01T00:00",
+    "due": "2025-10-20T23:59",
+    "points": 120,
+    "description": "Design an optimized rocket nozzle for maximum exhaust velocity and efficiency, incorporating expansion ratios and flow visualization analysis."
+  },
+  {
+    "_id": "A201",
+    "title": "Aerodynamics Quiz",
+    "course": "RS102",
+    "notAvailableUntil": "2025-09-05T00:00",
+    "due": "2025-09-10T23:59",
+    "points": 50,
+    "description": "A short quiz covering key aerodynamic principles including lift, drag, and boundary layer behavior for subsonic and supersonic flow."
+  },
+  {
+    "_id": "A202",
+    "title": "Flow Analysis",
+    "course": "RS102",
+    "notAvailableUntil": "2025-09-11T00:00",
+    "due": "2025-09-25T23:59",
+    "points": 100,
+    "description": "Simulate and analyze incompressible and compressible flow using computational methods to identify regions of turbulence and pressure variation."
+  },
+  {
+    "_id": "A203",
+    "title": "Heating Analysis",
+    "course": "RS102",
+    "notAvailableUntil": "2025-09-26T00:00",
+    "due": "2025-10-10T23:59",
+    "points": 80,
+    "description": "Investigate thermal transfer in aerodynamic surfaces under varying Mach numbers, focusing on convective heat transfer and material response."
+  },
+  {
+    "_id": "A301",
+    "title": "Structural Design Task",
+    "course": "RS103",
+    "notAvailableUntil": "2025-09-03T00:00",
+    "due": "2025-09-17T23:59",
+    "points": 100,
+    "description": "Perform finite element analysis on aerospace structural components to evaluate stress distribution, material fatigue, and load-bearing capacity."
+  },
+  {
+    "_id": "A302",
+    "title": "Orbital Calculations",
+    "course": "RS103",
+    "notAvailableUntil": "2025-09-18T00:00",
+    "due": "2025-10-02T23:59",
+    "points": 110,
+    "description": "Calculate orbital parameters for satellites using Kepler’s laws and Newtonian mechanics, including delta-v requirements for orbital transfers."
+  },
+  {
+    "_id": "A303",
+    "title": "Systems Engineering Exam",
+    "course": "RS103",
+    "notAvailableUntil": "2025-10-03T00:00",
+    "due": "2025-10-18T23:59",
+    "points": 150,
+    "description": "A comprehensive exam assessing understanding of integrated aerospace systems, mission planning, risk assessment, and subsystem coordination."
+  }
+]

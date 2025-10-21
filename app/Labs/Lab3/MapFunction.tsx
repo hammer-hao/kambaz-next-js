@@ -12,6 +12,7 @@ export default function MapFunction() {
             Todos:
             <ol>
                 {todos.map((todo) => (
+                    // eslint-disable-next-line react/jsx-key
                     <li>{todo}</li>
                 ))}
             </ol> <hr/>

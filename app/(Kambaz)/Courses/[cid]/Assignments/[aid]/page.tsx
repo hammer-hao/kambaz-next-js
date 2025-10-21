@@ -13,7 +13,7 @@ import { assignments } from "../../../../Database"
 
 export default function AssignmentEditor() {
     const { cid, aid } = useParams();
-    const assignment = assignments.find((a) => a._id === aid)
+    const assignment = assignments.find((a) => a._id === aid)!
 
     console.log(assignment)
 

@@ -19,7 +19,10 @@ export default function Modules() {
     const dispatch = useDispatch();
     return (
         <div>
-            <ModulesControls setModuleName={setModuleName} moduleName={moduleName} addModule={addModule}/><br /><br /><br /><br />
+            <ModulesControls setModuleName={setModuleName} moduleName={moduleName} addModule={() => {
+                dispatch(addModule({ name: moduleName, course: cid }));
+                setModuleName("");
+            }}/><br /><br /><br /><br />
             <ListGroup className= "rounded-0" id="wd-modules">
                 {modules
                     .filter((module) => module.course === cid)

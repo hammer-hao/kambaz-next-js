@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { redirect } from "next/dist/client/components/navigation";
+import { redirect } from "next/navigation";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -20,11 +20,14 @@ import { enroll, unenroll } from "../enrollmentsReducer";
 
 export default function Dashboard() {
     const { courses } = useSelector((state: RootState) => state.coursesReducer);
-    const { currentUser } = useSelector((state: RootState) => state.accountReducer);
 
-    if (!currentUser) {
-        redirect("/Account/Signin")
-    }
+    type CurrentUser = { _id: string };
+
+    const account = useSelector((s: RootState) =>
+        s.accountReducer
+    ) as { currentUser: CurrentUser | null };
+    const currentUser = account.currentUser;
+
     const { enrollments } = useSelector((state: RootState) => state.enrollmentsReducer);
     const dispatch = useDispatch();
 
@@ -41,8 +44,14 @@ export default function Dashboard() {
 
     const [showAll, setShowAll] = useState(false);
 
+    if (!currentUser) {
+        redirect("/Account/Signin");
+        return null;
+    }
+    const userId = currentUser._id;
+
     const isEnrolled = (courseId: string) =>
-        enrollments.some((e) => e.user === currentUser._id && e.course === courseId);
+        enrollments.some((e) => e.user === userId && e.course === courseId);
 
     const visibleCourses = showAll
         ? courses
@@ -87,6 +96,7 @@ export default function Dashboard() {
                 onChange={(e) => setCourse({ ...course, name: e.target.value })}
             />
             <FormControl
+                as="textarea"
                 value={course.description}
                 rows={3}
                 onChange={(e) => setCourse({ ...course, description: e.target.value })}

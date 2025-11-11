@@ -6,6 +6,7 @@ import { setCurrentUser } from "../reducer";
 import { RootState } from "../../store";
 import { Button, FormControl } from "react-bootstrap";
 export default function Profile() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [profile, setProfile] = useState<any>({});
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state: RootState) => state.accountReducer);

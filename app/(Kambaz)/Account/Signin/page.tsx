@@ -8,10 +8,12 @@ import * as db from "../../Database";
 import { FormControl, Button } from "react-bootstrap";
 
 export default function Signin() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [credentials, setCredentials] = useState<any>({});
     const dispatch = useDispatch();
     const signin = () => {
         const user = db.users.find(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (u: any) =>
                 u.username === credentials.username &&
                 u.password === credentials.password

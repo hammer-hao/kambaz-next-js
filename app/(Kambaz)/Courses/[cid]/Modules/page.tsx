@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../../store";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import * as db from "../../../Database";
 
-import { v4 as uuidv4 } from "uuid";
 import ModulesControls from "./ModulesControls";
 import {FormControl, ListGroup, ListGroupItem} from "react-bootstrap";
 import {BsGripVertical} from "react-icons/bs";

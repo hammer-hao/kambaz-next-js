@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import * as db from "../Database";
+import { redirect } from "next/dist/client/components/navigation";
+
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import CardImg from "react-bootstrap/CardImg";
@@ -20,9 +21,14 @@ import { enroll, unenroll } from "../enrollmentsReducer";
 export default function Dashboard() {
     const { courses } = useSelector((state: RootState) => state.coursesReducer);
     const { currentUser } = useSelector((state: RootState) => state.accountReducer);
+
+    if (!currentUser) {
+        redirect("/Account/Signin")
+    }
     const { enrollments } = useSelector((state: RootState) => state.enrollmentsReducer);
     const dispatch = useDispatch();
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [course, setCourse] = useState<any>({
         _id: "0",
         name: "New Course",

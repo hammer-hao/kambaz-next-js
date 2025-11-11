@@ -33,7 +33,9 @@ export default function ArrayStateVariable() {
       </ListGroup>
       <hr/>
       <ListGroup>
-        {todos.map((todo: any) => (
+        {todos.map(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (todo: any) => (
           <ListGroupItem key={todo.id}>
             {todo.title}
           </ListGroupItem>

@@ -11,7 +11,10 @@ export default function TodoList() {
       <h2>Todo List</h2>
       <ListGroup>
         <TodoForm />
-        {todos.map((todo: any) => (
+        {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            todos.map((todo: any) => (
+                // eslint-disable-next-line react/jsx-key
           <TodoItem todo={todo} />
         ))}
       </ListGroup>

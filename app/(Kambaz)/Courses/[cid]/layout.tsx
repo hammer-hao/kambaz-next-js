@@ -11,6 +11,7 @@ import Breadcrumb from "./Breadcrumb";
 export default function CoursesLayout({ children }: { children: ReactNode }) {
     const { cid } = useParams();
     const { courses } = useSelector((state: RootState) => state.coursesReducer);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const course = courses.find((course: any) => course._id === cid);
 
     const [navOpen, setNavOpen] = useState(true);

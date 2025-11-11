@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link";
+import Image from "next/image";
 import {ListGroup, ListGroupItem} from "react-bootstrap";
 import {FaInbox, FaRegCircleUser} from "react-icons/fa6";
 import {AiOutlineDashboard} from "react-icons/ai";
@@ -25,7 +26,7 @@ export default function KambazNavigation() {
                    id="wd-kambaz-navigation">
             <ListGroupItem className="bg-black border-0 text-center" as="a"
                            target="_blank" href="https://www.northeastern.edu/" id="wd-neu-link">
-                <img src="/images/NEU.png" width="75px" alt="Northeastern University" />
+                <Image src="/images/NEU.png" width={75} height={75} alt="Northeastern University" />
             </ListGroupItem>
             <ListGroupItem as={Link} href="/Account"
                            className={`text-center border-0 bg-black

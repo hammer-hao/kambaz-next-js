@@ -14,7 +14,7 @@ import LessonControlButtons from "@/app/(Kambaz)/Courses/[cid]/Modules/LessonCon
 import ModuleControlButtons from "@/app/(Kambaz)/Courses/[cid]/Modules/ModuleControlButtons";
 
 export default function Modules() {
-    const { cid } = useParams();
+    const { cid } = useParams<{ cid: string }>();
     const [moduleName, setModuleName] = useState("");
     const { modules } = useSelector((state: RootState) => state.modulesReducer);
     const dispatch = useDispatch();

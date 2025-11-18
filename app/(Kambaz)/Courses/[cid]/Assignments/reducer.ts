@@ -1,7 +1,5 @@
 "use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { assignments as dbAssignments } from "../../../Database";
-
 export type Assignment = {
     _id: string;
     title: string;
@@ -18,25 +16,29 @@ type State = {
 };
 
 const initialState: State = {
-    assignments: [...dbAssignments],
+    assignments: [],
 };
 
 const slice = createSlice({
     name: "assignments",
     initialState,
     reducers: {
+        setAssignments: (state, { payload }: PayloadAction<Assignment[]>) => {
+            state.assignments = payload;
+        },
         addAssignment: (state, { payload }: PayloadAction<Assignment>) => {
             state.assignments.unshift(payload);
         },
         updateAssignment: (state, { payload }: PayloadAction<Assignment>) => {
-            const i = state.assignments.findIndex(a => a._id === payload._id);
+            const i = state.assignments.findIndex((a) => a._id === payload._id);
             if (i >= 0) state.assignments[i] = payload;
         },
         deleteAssignment: (state, { payload }: PayloadAction<string>) => {
-            state.assignments = state.assignments.filter(a => a._id !== payload);
+            state.assignments = state.assignments.filter((a) => a._id !== payload);
         },
     },
 });
 
-export const { addAssignment, updateAssignment, deleteAssignment } = slice.actions;
+export const { setAssignments, addAssignment, updateAssignment, deleteAssignment } =
+    slice.actions;
 export default slice.reducer;

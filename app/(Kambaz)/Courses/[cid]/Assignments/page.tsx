@@ -10,29 +10,56 @@ import AssignmentIcon from "./AssignmentIcon";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/(Kambaz)/store";
-import { deleteAssignment, type Assignment } from "./reducer";
+import {
+    deleteAssignment,
+    type Assignment,
+    setAssignments,
+} from "./reducer";
+import { useEffect } from "react";
+import {
+    findAssignmentsForCourse,
+    deleteAssignmentOnServer,
+} from "./client";
 
 export default function Assignments() {
     const { cid } = useParams();
     const pathname = usePathname();
     const router = useRouter();
     const dispatch = useDispatch();
-    const { assignments } = useSelector((s: RootState) => s.assignmentsReducer);
+    const { assignments } = useSelector(
+        (s: RootState) => s.assignmentsReducer
+    );
 
-    const thisCourseAssignments = assignments.filter(a => pathname.includes(a.course));
+    // Load assignments for this course from the server
+    useEffect(() => {
+        const load = async () => {
+            if (!cid) return;
+            const data = await findAssignmentsForCourse(cid as string);
+            dispatch(setAssignments(data));
+        };
+        load();
+    }, [cid, dispatch]);
+
+    // If your server already filters by course, you can just use `assignments`
+    const thisCourseAssignments = assignments.filter((a) =>
+        pathname.includes(a.course)
+    );
 
     const isFaculty = true;
 
-    const onDelete = (aid: string) => {
+    const onDelete = async (aid: string) => {
         if (!isFaculty) return;
         if (window.confirm("Are you sure you want to remove this assignment?")) {
+            await deleteAssignmentOnServer(aid);
             dispatch(deleteAssignment(aid));
         }
     };
 
     return (
         <div id="wd-assignments">
-            <AssignmentControls onAdd={() => router.push(`/Courses/${cid}/Assignments/new`)} />
+            <AssignmentControls
+                onAdd={() => router.push(`/Courses/${cid}/Assignments/new`)}
+            />
             <br />
 
             <ListGroup className="rounded-0" id="wd-assignments">
@@ -63,18 +90,22 @@ export default function Assignments() {
                                         </Link>
                                         <br />
                                         <small className="text-muted">
-                                            <span className="text-danger fw-semibold">Multiple Modules</span>
+                      <span className="text-danger fw-semibold">
+                        Multiple Modules
+                      </span>
                                             <span className="mx-2">|</span>
-                                            Not available until {assignment.notAvailableUntil || "—"}
+                                            Not available until{" "}
+                                            {assignment.notAvailableUntil || "—"}
                                             <br />
-                                            <span className="text-danger">Due {assignment.due || "—"}</span>
+                                            <span className="text-danger">
+                        Due {assignment.due || "—"}
+                      </span>
                                             <span className="mx-2">|</span>
                                             {assignment.points ?? 0} pts
                                         </small>
                                     </div>
                                 </div>
 
-                                {/* Keep your existing buttons; add a small delete trigger on the right */}
                                 <div className="d-flex align-items-center gap-2">
                                     <LessonControlButtons />
                                     {isFaculty && (

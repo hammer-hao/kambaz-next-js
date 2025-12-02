@@ -5,8 +5,9 @@ const HTTP_SERVER = process.env.NEXT_PUBLIC_HTTP_SERVER;
 const USERS_API = `${HTTP_SERVER}/api/users`;
 
 export const findUserEnrollments = async (userId: string | "current") => {
+    console.log("finding enrollments for user:", userId)
     const { data } = await axiosWithCredentials.get(
-        `${USERS_API}/${userId}/enrollments`,
+        `${USERS_API}/${userId}/courses`,
     );
     return data;
 };

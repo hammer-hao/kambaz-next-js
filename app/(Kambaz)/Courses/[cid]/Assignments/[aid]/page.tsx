@@ -74,7 +74,7 @@ export default function AssignmentEditor() {
             due,
             notAvailableUntil: from,
             availableUntil: until,
-            course: coursePath,
+            course: cid as string,
         };
 
         if (isNew) {

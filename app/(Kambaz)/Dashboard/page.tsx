@@ -67,9 +67,10 @@ export default function Dashboard() {
             dispatch(setCourses(allCourses));
 
             // 2) User enrollments
-            const enrollments = await enrollmentsClient.findUserEnrollments("current");
+            const coursesForUser = await enrollmentsClient.findUserEnrollments("current");
+            console.log("coursesForUser =", coursesForUser);
             const ids = new Set<string>(
-                enrollments.map((e: { course: string }) => e.course),
+                coursesForUser.map((c: { _id: string }) => c._id),
             );
             setEnrolledIds(ids);
         } catch (error) {

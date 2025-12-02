@@ -1,41 +1,24 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import { Table } from "react-bootstrap";
+import PeopleDetails from "./Details";
+import Link from "next/link";
 import { FaUserCircle } from "react-icons/fa";
-import * as client from "../../../client";
+import {useState} from "react";
 
-export default function PeoplePage() {
-    const params = useParams();
-    const courseId = params?.cid as string;
-
-    const [users, setUsers] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    const fetchUsers = async () => {
-        if (!courseId) return;
-        try {
-            const data = await client.findUsersForCourse(courseId);
-            setUsers(data);
-        } catch (e) {
-            console.error("Failed to load users for course", e);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchUsers();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [courseId]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
+export default function PeopleTable({ users = [], fetchUsers }: { users?: any[]; fetchUsers: () => void; }) {
+    const [showDetails, setShowDetails] = useState(false);
+    const [showUserId, setShowUserId] = useState<string | null>(null);
     return (
         <div id="wd-people-table">
+            {showDetails && (
+                <PeopleDetails
+                    uid={showUserId}
+                    onClose={() => {
+                        setShowDetails(false);
+                        fetchUsers();
+                    }}/>
+            )}
             <Table striped>
                 <thead>
                 <tr>
@@ -51,9 +34,16 @@ export default function PeoplePage() {
                 {users.map((user) => (
                     <tr key={user._id}>
                         <td className="wd-full-name text-nowrap">
+                            <span className="text-decoration-none"
+                                  onClick={() => {
+                                      console.log("Clicked", user._id);
+                                      setShowDetails(true);
+                                      setShowUserId(user._id);
+                                  }} >
                             <FaUserCircle className="me-2 fs-1 text-secondary" />
                             <span className="wd-first-name">{user.firstName}</span>{" "}
                             <span className="wd-last-name">{user.lastName}</span>
+                            </span>
                         </td>
                         <td className="wd-login-id">{user.loginId}</td>
                         <td className="wd-section">{user.section}</td>

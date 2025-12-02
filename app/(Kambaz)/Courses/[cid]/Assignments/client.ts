@@ -8,13 +8,13 @@ const SERVER =
 
 export const findAssignmentsForCourse = async (cid: string) => {
     const { data } = await axios.get<Assignment[]>(
-        `${SERVER}/courses/${cid}/assignments`
+        `${SERVER}/api/courses/${cid}/assignments`
     );
     return data;
 };
 
 export const findAssignmentById = async (aid: string) => {
-    const { data } = await axios.get<Assignment>(`${SERVER}/assignments/${aid}`);
+    const { data } = await axios.get<Assignment>(`${SERVER}/api/assignments/${aid}`);
     return data;
 };
 
@@ -23,7 +23,7 @@ export const createAssignment = async (
     assignment: Assignment
 ) => {
     const { data } = await axios.post<Assignment>(
-        `${SERVER}/courses/${cid}/assignments`,
+        `${SERVER}/api/courses/${cid}/assignments`,
         assignment
     );
     return data;
@@ -31,12 +31,12 @@ export const createAssignment = async (
 
 export const updateAssignmentOnServer = async (assignment: Assignment) => {
     const { data } = await axios.put<Assignment>(
-        `${SERVER}/assignments/${assignment._id}`,
+        `${SERVER}/api/assignments/${assignment._id}`,
         assignment
     );
     return data;
 };
 
 export const deleteAssignmentOnServer = async (aid: string) => {
-    await axios.delete(`${SERVER}/assignments/${aid}`);
+    await axios.delete(`${SERVER}/api/assignments/${aid}`);
 };

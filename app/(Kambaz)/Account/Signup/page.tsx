@@ -14,7 +14,7 @@ export default function Signup() {
     const signup = async () => {
         const currentUser = await client.signup(user);
         dispatch(setCurrentUser(currentUser));
-        redirect("/Profile");
+        redirect("Account/Profile");
     };
     return (
         <div className="wd-signup-screen">

@@ -26,5 +26,12 @@ export default function Labs() {
                         Lab 5: Node Server App </Link>
                 </li>
             </ul>
+            <h1>Project: Kambaz Quizzes</h1>
+            <h2>Group members: Zihe Hao, Tingxun Wang (graduate section 4)</h2>
+            <Link href="https://github.com/hammer-hao/kambaz-next-js/tree/quizzes">
+                GitHub Repository for front end project </Link>
+            <br />
+            <Link href="https://github.com/hammer-hao/kambaz-node-server-app/tree/quizzes">
+                GitHub Repository for server side project </Link>
         </div>
     );}

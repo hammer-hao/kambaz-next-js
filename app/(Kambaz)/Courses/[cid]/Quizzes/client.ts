@@ -1,6 +1,9 @@
-export const QUIZZES_API = "http://localhost:4000/api/quizzes";
-export const COURSES_API = "http://localhost:4000/api/courses";
-export const QUESTIONS_API = "http://localhost:4000/api/questions";
+const SERVER =
+    process.env.NEXT_PUBLIC_HTTP_SERVER;
+
+export const QUIZZES_API = `${SERVER}/api/quizzes`;
+export const COURSES_API = `${SERVER}/api/courses`;
+export const QUESTIONS_API = `${SERVER}/api/questions`;
 
 // Fetch all quizzes for a course
 export const findQuizzesForCourse = async (courseId: string) => {

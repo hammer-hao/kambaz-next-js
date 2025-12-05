@@ -30,7 +30,14 @@ export default function Assignments() {
         (s: RootState) => s.assignmentsReducer
     );
 
-    // Load assignments for this course from the server
+    // ----- currentUser & faculty flag -----
+    const account = useSelector((s: RootState) =>
+        s.accountReducer
+    ) as { currentUser: { role?: string } | null };
+
+    const currentUser = account.currentUser;
+    const isFaculty = currentUser?.role === "FACULTY" || currentUser?.role === "ADMIN";
+
     useEffect(() => {
         const load = async () => {
             if (!cid) return;
@@ -45,10 +52,8 @@ export default function Assignments() {
         pathname.includes(a.course)
     );
 
-    const isFaculty = true;
-
     const onDelete = async (aid: string) => {
-        if (!isFaculty) return;
+        if (!isFaculty) return; // guard: only faculty can delete
         if (window.confirm("Are you sure you want to remove this assignment?")) {
             await deleteAssignmentOnServer(aid);
             dispatch(deleteAssignment(aid));
@@ -57,10 +62,17 @@ export default function Assignments() {
 
     return (
         <div id="wd-assignments">
-            <AssignmentControls
-                onAdd={() => router.push(`/Courses/${cid}/Assignments/new`)}
-            />
-            <br />
+            {/* Only faculty see the controls to add a new assignment */}
+            {isFaculty && (
+                <>
+                    <AssignmentControls
+                        onAdd={() =>
+                            router.push(`/Courses/${cid}/Assignments/new`)
+                        }
+                    />
+                    <br />
+                </>
+            )}
 
             <ListGroup className="rounded-0" id="wd-assignments">
                 <ListGroupItem className="wd-module p-0 mb-5 fs-5 border-gray">
@@ -90,16 +102,16 @@ export default function Assignments() {
                                         </Link>
                                         <br />
                                         <small className="text-muted">
-                      <span className="text-danger fw-semibold">
-                        Multiple Modules
-                      </span>
+                                            <span className="text-danger fw-semibold">
+                                                Multiple Modules
+                                            </span>
                                             <span className="mx-2">|</span>
                                             Not available until{" "}
                                             {assignment.notAvailableUntil || "—"}
                                             <br />
                                             <span className="text-danger">
-                        Due {assignment.due || "—"}
-                      </span>
+                                                Due {assignment.due || "—"}
+                                            </span>
                                             <span className="mx-2">|</span>
                                             {assignment.points ?? 0} pts
                                         </small>

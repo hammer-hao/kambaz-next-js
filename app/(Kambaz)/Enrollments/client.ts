@@ -8,6 +8,7 @@ export const findUserEnrollments = async (userId: string | "current") => {
     console.log("finding enrollments for user:", userId)
     const { data } = await axiosWithCredentials.get(
         `${USERS_API}/${userId}/courses`,
+        {withCredentials: true}
     );
     return data;
 };

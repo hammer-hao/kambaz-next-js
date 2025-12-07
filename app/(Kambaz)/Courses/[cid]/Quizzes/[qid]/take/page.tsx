@@ -23,71 +23,7 @@ import {
     Badge,
 } from "react-bootstrap";
 
-type BackendQuestionType =
-    | "MULTIPLE_CHOICE"
-    | "TRUE_FALSE"
-    | "FILL_IN_BLANK";
-
-interface BackendQuestion {
-    _id: string;
-    quizId: string;
-    type: BackendQuestionType;
-    title?: string;
-    points?: number;
-    text?: string;
-    choices?: string[];
-    correctChoiceIndexes?: number[];
-    correctChoiceIndex?: number; // fallback
-    correctBool?: boolean;
-    blanks?: string[];
-}
-
-interface QuizMeta {
-    _id: string;
-    course: string;
-    title: string;
-    totalPoints?: number;
-    multipleAttempts?: boolean;
-    maxAttempts?: number;
-}
-
-// User answer state per question
-type UserAnswer =
-    | { type: "MULTIPLE_CHOICE"; choiceIndexes: number[] }
-    | { type: "TRUE_FALSE"; value: boolean | null }
-    | { type: "FILL_IN_BLANK"; text: string };
-
-// Result per question (local)
-interface QuestionResult {
-    correct: boolean;
-    earnedPoints: number;
-}
-
-// What the backend returns for the last attempt
-interface AttemptAnswer {
-    questionId: string;
-    type: BackendQuestionType;
-    choiceIndexes?: number[];
-    value?: boolean;
-    text?: string;
-    correct: boolean;
-    earnedPoints: number;
-}
-
-interface QuizAttempt {
-    _id: string;
-    quizId: string;
-    studentId: string;
-    submittedAt: string;
-    score: number;
-    totalPoints: number;
-    answers: AttemptAnswer[];
-}
-
-interface AttemptsMeta {
-    attemptsUsed: number;
-    lastAttempt: QuizAttempt | null;
-}
+import {UserAnswer, QuestionResult, BackendQuestion, AttemptsMeta, QuizAttempt, QuizMeta } from "./types"
 
 export default function QuizTakePage() {
     const params = useParams();
@@ -129,13 +65,11 @@ export default function QuizTakePage() {
     const attemptsLeft = Math.max(0, maxAttempts - attemptsUsed);
     const noMoreAttempts = attemptsLeft <= 0;
 
-    // Total points from questions (fallback)
     const totalPossiblePoints = useMemo(() => {
         if (questions.length === 0) return 0;
         return questions.reduce((sum, q) => sum + (q.points ?? 1), 0);
     }, [questions]);
 
-    // -------- Load quiz, questions, and attempts --------
     useEffect(() => {
         const load = async () => {
             try {
@@ -240,7 +174,6 @@ export default function QuizTakePage() {
         }
     }, [qid, isNewQuiz]);
 
-    // -------- Answer updating helpers --------
     const updateAnswer = (index: number, newAnswer: UserAnswer) => {
         if (submitted && noMoreAttempts) return; // cannot change when out of attempts
         setAnswers((prev) => {
@@ -271,7 +204,6 @@ export default function QuizTakePage() {
         setCurrentIndex(0);
     };
 
-    // -------- Local scoring (for immediate feedback) --------
     const scoreLocally = (): QuestionResult[] => {
         return questions.map((q, idx) => {
             const ans = answers[idx];
@@ -402,8 +334,6 @@ export default function QuizTakePage() {
                 lastAttempt: attempt,
             });
 
-            // Use server-graded score if you want:
-            // convert attempt.answers -> QuestionResult to keep consistent with backend
             const serverResults: QuestionResult[] = questions.map((q) => {
                 const a = attempt.answers.find(
                     (ans) => ans.questionId === q._id
@@ -666,7 +596,6 @@ export default function QuizTakePage() {
     );
 }
 
-// ---------- Render controls for a single question ----------
 function renderAnswerControls(
     q: BackendQuestion,
     ans: UserAnswer | undefined,
